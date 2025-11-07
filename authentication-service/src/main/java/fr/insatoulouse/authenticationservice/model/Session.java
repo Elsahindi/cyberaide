@@ -2,6 +2,7 @@ package fr.insatoulouse.authenticationservice.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public class Session {
     private String token;
 
     @Column(nullable = false)
-    @CreatedDate
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(nullable = false)
