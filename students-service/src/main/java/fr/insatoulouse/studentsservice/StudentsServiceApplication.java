@@ -1,13 +1,13 @@
-package fr.insatoulouse.profilesservice;
+package fr.insatoulouse.studentsservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProfilesServiceApplication {
+public class StudentsServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProfilesServiceApplication.class, args);
+        SpringApplication.run(StudentsServiceApplication.class, args);
     }
 
 }
