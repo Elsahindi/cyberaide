@@ -17,7 +17,7 @@ public class Session {
     private UUID uuid;
 
     @Column(nullable = false)
-    private UUID studentUuid;
+    private UUID credentialUuid;
 
     @Column(nullable = false, unique = true)
     private String token;
