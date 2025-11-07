@@ -25,11 +25,11 @@ public class CredentialService {
         return credential;
     }
 
-    public Credential createCredential(CreateCredentialDTO dto) {
+    public void createCredential(CreateCredentialDTO dto) {
         Credential credential = new Credential();
         credential.setEmail(dto.email());
         credential.setPassword(dto.password());
-        return credentialRepository.save(credential);
+        credentialRepository.save(credential);
     }
 
 }

@@ -23,7 +23,7 @@ public class Session {
     @Column(nullable = false, unique = true)
     private String token;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdAt;
 
