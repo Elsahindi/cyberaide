@@ -31,7 +31,7 @@ public class SessionController {
         }
 
         return ResponseEntity.ok(new SessionDTO(
-                session.getStudentUuid(),
+                session.getCredentialUuid(),
                 session.getToken(),
                 session.getExpiresAt()
         ));
