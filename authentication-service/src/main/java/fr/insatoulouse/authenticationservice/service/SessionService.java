@@ -1,13 +1,11 @@
 package fr.insatoulouse.authenticationservice.service;
 
 import fr.insatoulouse.authenticationservice.dto.CreateSessionDTO;
-import fr.insatoulouse.authenticationservice.dto.SessionDTO;
 import fr.insatoulouse.authenticationservice.model.Credential;
 import fr.insatoulouse.authenticationservice.model.Session;
 import fr.insatoulouse.authenticationservice.repository.SessionRepository;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
