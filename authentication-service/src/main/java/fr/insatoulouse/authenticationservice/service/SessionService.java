@@ -1,5 +1,7 @@
 package fr.insatoulouse.authenticationservice.service;
 
+import fr.insatoulouse.authenticationservice.dto.SessionDTO;
+import fr.insatoulouse.authenticationservice.model.Credential;
 import fr.insatoulouse.authenticationservice.model.Session;
 import fr.insatoulouse.authenticationservice.repository.SessionRepository;
 import jakarta.annotation.Nullable;
@@ -41,5 +43,15 @@ public class SessionService {
         sessionRepository.delete(session);
 
         return null;
+    }
+
+    public Session createSession(Credential credential) {
+        Session session = new Session();
+        session.setToken(generateRandomToken());
+        session.setCredentialUuid(credential.getUuid());
+        session.setExpiresAt(
+                new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000)
+        ); // In 24 hours
+        return sessionRepository.save(session);
     }
 }
