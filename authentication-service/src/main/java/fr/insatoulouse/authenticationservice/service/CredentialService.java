@@ -16,6 +16,8 @@ public class CredentialService {
         Credential credential = credentialRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
+        // TODO: Should never store passwords in plain text. Use hashing (e.g., BCrypt) instead.
+        // This is just for demonstration purposes.
         if (!credential.getPassword().equals(password)) {
             throw new IllegalArgumentException("Invalid email or password");
         }
@@ -23,11 +25,11 @@ public class CredentialService {
         return credential;
     }
 
-    public Credential createCredential(CreateCredentialDTO dto) {
+    public void createCredential(CreateCredentialDTO dto) {
         Credential credential = new Credential();
         credential.setEmail(dto.email());
         credential.setPassword(dto.password());
-        return credentialRepository.save(credential);
+        credentialRepository.save(credential);
     }
 
 }
