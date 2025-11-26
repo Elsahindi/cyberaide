@@ -20,8 +20,8 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<StudentDTO> show(String id) {
+    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    public ResponseEntity<StudentDTO> show(@PathVariable String id) {
         Student student = studentService.getStudent(id);
 
         if (student == null) {
@@ -41,7 +41,7 @@ public class StudentController {
     public ResponseEntity<StudentDTO> create(@RequestBody CreateStudentDTO dto) {
         Student student = studentService.createStudent(dto);
 
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("{/id").buildAndExpand(student.getId()).toUri()).body(new StudentDTO(
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(student.getId()).toUri()).body(new StudentDTO(
                 student.getId(),
                 student.getFirstName(),
                 student.getLastName(),
