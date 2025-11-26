@@ -4,14 +4,13 @@ import fr.insatoulouse.studentsservice.dto.CreateStudentDTO;
 import fr.insatoulouse.studentsservice.dto.StudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.service.StudentService;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/student")
@@ -21,7 +20,7 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<StudentDTO> show(@PathVariable String id) {
+    public ResponseEntity<StudentDTO> show(@PathVariable UUID id) {
         Student student = studentService.getStudent(id);
 
         if (student == null) {
@@ -43,7 +42,7 @@ public class StudentController {
 
 
 
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(student.getId()).toUri()).body(new StudentDTO(
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(student.getUuid()).toUri()).body(new StudentDTO(
                 student.getUuid(),
                 student.getFirstName(),
                 student.getLastName(),
@@ -53,5 +52,11 @@ public class StudentController {
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<StudentDTO> delete(@PathVariable String id) {}
+    public Object delete(@PathVariable UUID id) {
+        Student student = studentService.getStudent(id);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent();
+    }
 }

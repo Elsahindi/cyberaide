@@ -2,6 +2,7 @@ package fr.insatoulouse.studentsservice.service;
 
 import fr.insatoulouse.studentsservice.dto.CreateStudentDTO;
 import fr.insatoulouse.studentsservice.dto.StudentDTO;
+import fr.insatoulouse.studentsservice.dto.UpdateStudentDTO;
 import fr.insatoulouse.studentsservice.model.Field;
 import fr.insatoulouse.studentsservice.model.School;
 import fr.insatoulouse.studentsservice.model.Student;
@@ -10,6 +11,7 @@ import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class StudentService {
@@ -21,7 +23,7 @@ public class StudentService {
     }
 
     @Nullable
-    public Student getStudent(String id) {
+    public Student getStudent(UUID id) {
 
         return studentRepository.findById(id).orElse(null);
     }
@@ -34,4 +36,9 @@ public class StudentService {
         student.setField(studentDTO.field());
         return studentRepository.save(student);
     }
+
+    public void deleteStudent(UUID id) {
+        studentRepository.deleteById(id);
+    }
+
 }

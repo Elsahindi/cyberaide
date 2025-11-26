@@ -29,7 +29,4 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     private Field field;
-
-
-
 }
