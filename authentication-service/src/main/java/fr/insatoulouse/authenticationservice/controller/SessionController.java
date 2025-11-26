@@ -1,9 +1,9 @@
 package fr.insatoulouse.authenticationservice.controller;
 
-import fr.insatoulouse.authenticationservice.dto.CreateSessionDTO;
-import fr.insatoulouse.authenticationservice.dto.SessionDTO;
 import fr.insatoulouse.authenticationservice.model.Session;
 import fr.insatoulouse.authenticationservice.service.SessionService;
+import fr.insatoulouse.shared.dto.CreateSessionDTO;
+import fr.insatoulouse.shared.dto.SessionDTO;
 import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

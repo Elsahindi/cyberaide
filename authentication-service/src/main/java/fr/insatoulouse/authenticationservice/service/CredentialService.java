@@ -1,8 +1,8 @@
 package fr.insatoulouse.authenticationservice.service;
 
-import fr.insatoulouse.authenticationservice.dto.CreateCredentialDTO;
 import fr.insatoulouse.authenticationservice.model.Credential;
 import fr.insatoulouse.authenticationservice.repository.CredentialRepository;
+import fr.insatoulouse.shared.dto.CreateCredentialDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

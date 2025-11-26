@@ -1,6 +1,5 @@
 package fr.insatoulouse.requestsservice.service;
 
-import fr.insatoulouse.requestsservice.dto.CreateRequestDTO;
 import fr.insatoulouse.requestsservice.model.Request;
 import fr.insatoulouse.requestsservice.repository.IRequestRepository;
 import jakarta.annotation.Nullable;

@@ -1,9 +1,9 @@
 package fr.insatoulouse.authenticationservice.service;
 
-import fr.insatoulouse.authenticationservice.dto.CreateSessionDTO;
 import fr.insatoulouse.authenticationservice.model.Credential;
 import fr.insatoulouse.authenticationservice.model.Session;
 import fr.insatoulouse.authenticationservice.repository.SessionRepository;
+import fr.insatoulouse.shared.dto.CreateSessionDTO;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

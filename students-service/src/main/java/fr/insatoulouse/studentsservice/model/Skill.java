@@ -10,12 +10,12 @@ import java.util.UUID;
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID uuid;
 
     @Column(nullable = false)
     private String title;
 
+    /*
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_uuid", nullable = false)
-    private Student student;
+    private Student student;*/
 }

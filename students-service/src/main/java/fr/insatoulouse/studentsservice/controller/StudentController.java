@@ -1,7 +1,7 @@
 package fr.insatoulouse.studentsservice.controller;
 
-import fr.insatoulouse.studentsservice.dto.CreateStudentDTO;
-import fr.insatoulouse.studentsservice.dto.StudentDTO;
+import fr.insatoulouse.shared.dto.CreateStudentDTO;
+import fr.insatoulouse.shared.dto.StudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.service.StudentService;
 import jakarta.ws.rs.core.MediaType;

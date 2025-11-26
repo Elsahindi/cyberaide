@@ -1,4 +1,4 @@
-package fr.insatoulouse.requestsservice.enums;
+package fr.insatoulouse.shared.enums;
 
 public enum RequestStatus {
     PENDING,

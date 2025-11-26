@@ -1,4 +1,4 @@
-package fr.insatoulouse.requestsservice.dto;
+package fr.insatoulouse.shared.dto;
 
 import java.util.Date;
 

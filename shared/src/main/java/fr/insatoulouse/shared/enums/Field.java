@@ -1,4 +1,4 @@
-package fr.insatoulouse.studentsservice.model;
+package fr.insatoulouse.shared.enums;
 
 public enum Field {
     IR,
