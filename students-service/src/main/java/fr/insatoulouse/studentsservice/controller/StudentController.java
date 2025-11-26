@@ -49,4 +49,7 @@ public class StudentController {
                 student.getField()
         ));
     }
+
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    public ResponseEntity<StudentDTO> delete(@PathVariable String id) {}
 }
