@@ -29,7 +29,7 @@ public class StudentController {
         }
 
         return ResponseEntity.ok(new StudentDTO(
-                student.getId(),
+                student.getUuid(),
                 student.getFirstName(),
                 student.getLastName(),
                 student.getSchool(),
@@ -41,8 +41,10 @@ public class StudentController {
     public ResponseEntity<StudentDTO> create(@RequestBody CreateStudentDTO dto) {
         Student student = studentService.createStudent(dto);
 
+
+
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(student.getId()).toUri()).body(new StudentDTO(
-                student.getId(),
+                student.getUuid(),
                 student.getFirstName(),
                 student.getLastName(),
                 student.getSchool(),
