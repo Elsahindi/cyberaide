@@ -37,10 +37,8 @@ public class StudentController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<StudentDTO> create(@RequestBody CreateStudentDTO dto) {
+    public ResponseEntity<Object> create(@RequestBody StudentDTO dto) {
         Student student = studentService.createStudent(dto);
-
-
 
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(student.getUuid()).toUri()).body(new StudentDTO(
                 student.getUuid(),

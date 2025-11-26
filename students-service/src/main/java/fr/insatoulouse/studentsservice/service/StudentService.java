@@ -1,11 +1,13 @@
 package fr.insatoulouse.studentsservice.service;
 
 import fr.insatoulouse.shared.dto.CreateStudentDTO;
+import fr.insatoulouse.shared.dto.StudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.repository.StudentRepository;
 import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -23,16 +25,15 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
-    public Student createStudent(CreateStudentDTO studentDTO) {
+    public Student createStudent(StudentDTO studentDTO) {
         Student student = new Student();
 
-        // Contacter le authentication service pour récup l'id du student (avec le token)
-        student.setUuid();
-
+        student.setUuid(studentDTO.uuid());
         student.setFirstName(studentDTO.firstName());
         student.setLastName(studentDTO.lastName());
         student.setSchool(studentDTO.school());
         student.setField(studentDTO.field());
+
         return studentRepository.save(student);
     }
 

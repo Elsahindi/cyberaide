@@ -1,7 +1,6 @@
 package fr.insatoulouse.requestsservice.model;
 
-import com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator;
-import fr.insatoulouse.requestsservice.enums.RequestStatus;
+import fr.insatoulouse.shared.enums.RequestStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

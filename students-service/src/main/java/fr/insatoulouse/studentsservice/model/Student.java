@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(unique = true, nullable = false)
     private UUID uuid;
 
     @Column(nullable = false)

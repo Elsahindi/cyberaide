@@ -3,6 +3,8 @@ package fr.insatoulouse.authenticationservice.service;
 import fr.insatoulouse.authenticationservice.model.Credential;
 import fr.insatoulouse.authenticationservice.repository.CredentialRepository;
 import fr.insatoulouse.shared.dto.CreateCredentialDTO;
+import fr.insatoulouse.shared.dto.CreateStudentDTO;
+import fr.insatoulouse.shared.dto.StudentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class CredentialService {
 
     private final CredentialRepository credentialRepository;
+
+    private final StudentService studentService;
 
     public Credential getAndValidateCredential(String email, String password) {
         Credential credential = credentialRepository.findByEmail(email)
@@ -25,11 +29,19 @@ public class CredentialService {
         return credential;
     }
 
-    public void createCredential(CreateCredentialDTO dto) {
+    public void createCredential(CreateCredentialDTO credentialDTO, CreateStudentDTO studentDTO) {
         Credential credential = new Credential();
-        credential.setEmail(dto.email());
-        credential.setPassword(dto.password());
+        credential.setEmail(credentialDTO.email());
+        credential.setPassword(credentialDTO.password());
         credentialRepository.save(credential);
+
+        studentService.createStudent(new StudentDTO(
+                credential.getUuid(),
+                studentDTO.firstName(),
+                studentDTO.lastName(),
+                studentDTO.school(),
+                studentDTO.field()
+        ));
     }
 
 }
