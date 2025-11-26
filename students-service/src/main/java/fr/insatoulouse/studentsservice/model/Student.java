@@ -8,14 +8,15 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uuid;
 
     @Column(nullable = false)
     private String firstName;
@@ -28,5 +29,7 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     private Field field;
+
+
 
 }
