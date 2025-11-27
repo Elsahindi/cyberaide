@@ -23,6 +23,9 @@ public class Request {
     private String description;
 
     @Column(nullable = false)
+    private String keyword;
+
+    @Column(nullable = false)
     private UUID requesterUuid;
 
     @Column(nullable = false)

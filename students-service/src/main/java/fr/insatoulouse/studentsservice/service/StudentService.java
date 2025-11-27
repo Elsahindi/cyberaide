@@ -1,23 +1,24 @@
 package fr.insatoulouse.studentsservice.service;
 
 import fr.insatoulouse.shared.dto.CreateStudentDTO;
+import fr.insatoulouse.shared.dto.SessionDTO;
 import fr.insatoulouse.shared.dto.StudentDTO;
+import fr.insatoulouse.shared.dto.UpdateStudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.repository.StudentRepository;
 import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
 public class StudentService {
 
-    private final StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    private AuthenticationService authenticationService;
 
     @Nullable
     public Student getStudent(UUID id) {
@@ -41,4 +42,23 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    public Student updateStudent(UUID uuid, UpdateStudentDTO student, String token) {
+        SessionDTO session = authenticationService.getUserSession(token);
+
+        if (session == null || !session.credentialUuid().equals(uuid)) {
+            throw new IllegalArgumentException("Unauthorized");
+        }
+
+        try {
+            Student existingStudent = getStudent(uuid);
+            Objects.requireNonNull(existingStudent).setFirstName(student.firstName());
+            existingStudent.setLastName(student.lastName());
+            existingStudent.setSchool(student.school());
+            existingStudent.setField(student.field());
+
+            return studentRepository.save(existingStudent);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Unauthorized");
+        }
+    }
 }

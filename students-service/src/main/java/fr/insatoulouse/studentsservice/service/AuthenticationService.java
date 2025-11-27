@@ -1,4 +1,4 @@
-package fr.insatoulouse.requestsservice.service;
+package fr.insatoulouse.studentsservice.service;
 
 import fr.insatoulouse.shared.dto.SessionDTO;
 import jakarta.annotation.Nullable;
