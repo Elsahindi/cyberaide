@@ -5,6 +5,7 @@ import fr.insatoulouse.shared.dto.StudentDTO;
 import fr.insatoulouse.shared.dto.UpdateStudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.service.StudentService;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
