@@ -7,6 +7,7 @@ import fr.insatoulouse.shared.dto.StudentDTO;
 import fr.insatoulouse.shared.dto.UpdateRequestDTO;
 import fr.insatoulouse.shared.enums.RequestStatus;
 import jakarta.annotation.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @RequestMapping("/requests")
 public class RequestService {
 
+    @Autowired
     private IRequestRepository requestRepository;
 
     public List<Request> getAll() {
@@ -46,6 +48,7 @@ public class RequestService {
         request.setRequesterUuid(studentUuid);
         request.setStatus(RequestStatus.PENDING);
         request.setDueDate(dto.dueDate());
+        request.setKeyword(dto.keyword());
 
         return requestRepository.save(request);
     }

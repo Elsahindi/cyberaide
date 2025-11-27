@@ -24,7 +24,7 @@ public class StudentService {
     @Nullable
     public List<StudentDTO> getStudentsWithSkills(List<String> skills) {
         ResponseEntity<List<StudentDTO>> response = restTemplate.exchange(
-                AUTHENTICATION_SERVICE_URL + "/students/skills?skills=" + String.join(",", skills),
+                AUTHENTICATION_SERVICE_URL + "/student?skills=" + String.join(",", skills),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<StudentDTO>>() {

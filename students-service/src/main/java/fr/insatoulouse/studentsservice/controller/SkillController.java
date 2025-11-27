@@ -1,19 +1,16 @@
 package fr.insatoulouse.studentsservice.controller;
 
+import fr.insatoulouse.shared.dto.CreateSkillDTO;
 import fr.insatoulouse.shared.dto.SkillDTO;
 import fr.insatoulouse.shared.dto.StudentDTO;
-import fr.insatoulouse.shared.dto.UpdateStudentDTO;
 import fr.insatoulouse.studentsservice.model.Skill;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.service.SkillService;
 import fr.insatoulouse.studentsservice.service.StudentService;
-import jakarta.ws.rs.HeaderParam;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +24,7 @@ public class SkillController {
     private final SkillService skillService;
     private final StudentService studentService;
 
-    @GetMapping(path = "/student/{id}/skills", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    @GetMapping(path = "/student/{id}/skill", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<List<SkillDTO>> show(@PathVariable UUID id) {
         Student student = studentService.getStudent(id);
 
@@ -56,7 +53,7 @@ public class SkillController {
     }
 
     @PostMapping(path = "/student/{id}/skill", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<SkillDTO> create(@PathVariable UUID id, @RequestBody SkillDTO dto, @HeaderParam("Authorization") String token) {
+    public ResponseEntity<SkillDTO> create(@PathVariable UUID id, @RequestBody CreateSkillDTO dto, @RequestHeader("Authorization") String token) {
         Skill skill = skillService.addSkillToStudent(dto, id, token);
 
         if (skill == null) {
@@ -78,7 +75,7 @@ public class SkillController {
     }
 
     @DeleteMapping(path = "/student/{id}/skill/{skillId}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public Object delete(@PathVariable UUID id, @PathVariable UUID skillId, @HeaderParam("Authorization") String token) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, @PathVariable UUID skillId, @RequestHeader("Authorization") String token) {
         Skill skill = skillService.getSkill(skillId);
 
         if (skill == null) {
@@ -89,9 +86,9 @@ public class SkillController {
             return ResponseEntity.badRequest().build();
         }
 
-        this.studentService.deleteStudent(skill.getUuid(), token);
+        this.skillService.removeSkillFromStudent(skill, skill.getStudent(), token);
 
-        return ResponseEntity.noContent();
+        return ResponseEntity.noContent().build();
     }
 
 

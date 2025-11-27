@@ -16,9 +16,10 @@ public class SessionController {
 
     private final SessionService sessionService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    @GetMapping(produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<SessionDTO> show(@RequestHeader(value = "Authorization") String token) {
         token = token.replace("Bearer ", "");
+        System.out.println(token);
         Session session = sessionService.getSession(token);
 
         if (session == null) {

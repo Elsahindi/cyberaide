@@ -6,6 +6,7 @@ import fr.insatoulouse.shared.dto.UpdateStudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.repository.IStudentRepository;
 import jakarta.annotation.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,10 @@ import java.util.UUID;
 @Service
 public class StudentService {
 
+    @Autowired
     private IStudentRepository studentRepository;
 
+    @Autowired
     private AuthenticationService authenticationService;
 
     @Nullable

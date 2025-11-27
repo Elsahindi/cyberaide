@@ -21,6 +21,7 @@ public class AuthenticationService {
     public SessionDTO getUserSession(String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
+        System.out.println("Sent token: " + token);
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
