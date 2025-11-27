@@ -3,6 +3,7 @@ package fr.insatoulouse.requestsservice.service;
 import fr.insatoulouse.requestsservice.model.Request;
 import fr.insatoulouse.requestsservice.repository.IRequestRepository;
 import fr.insatoulouse.shared.dto.CreateRequestDTO;
+import fr.insatoulouse.shared.dto.StudentDTO;
 import fr.insatoulouse.shared.dto.UpdateRequestDTO;
 import fr.insatoulouse.shared.enums.RequestStatus;
 import jakarta.annotation.Nullable;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +30,12 @@ public class RequestService {
     @Nullable
     public Request getById(UUID uuid) {
         return requestRepository.findById(uuid).orElse(null);
+    }
+
+    public List<StudentDTO> getRecommendedHelpers(UUID requestUuid) {
+        Request request = getById(requestUuid);
+
+        return new ArrayList<>();
     }
 
     public Request create(CreateRequestDTO dto, UUID studentUuid) {

@@ -9,6 +9,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface SessionRepository extends JpaRepository<@NonNull Session, @NonNull UUID> {
+public interface ISessionRepository extends JpaRepository<@NonNull Session, @NonNull UUID> {
     Optional<Session> findByToken(String token);
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,4 +28,10 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     private Field field;
+
+    @Column(nullable = false)
+    private boolean isHelper;
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Skill> skills;
 }

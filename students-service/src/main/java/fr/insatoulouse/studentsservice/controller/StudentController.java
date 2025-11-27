@@ -6,12 +6,14 @@ import fr.insatoulouse.shared.dto.UpdateStudentDTO;
 import fr.insatoulouse.studentsservice.model.Student;
 import fr.insatoulouse.studentsservice.service.StudentService;
 import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +22,18 @@ import java.util.UUID;
 public class StudentController {
 
     private final StudentService studentService;
+
+    @GetMapping()
+    public ResponseEntity<List<StudentDTO>> index(@QueryParam("skills") List<String> skills) {
+        return ResponseEntity.ok(this.studentService.getAllStudentsWithSkills(skills).stream().map(student -> new StudentDTO(
+                student.getUuid(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getSchool(),
+                student.getField(),
+                student.isHelper()
+        )).toList());
+    }
 
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<StudentDTO> show(@PathVariable UUID id) {
@@ -34,7 +48,8 @@ public class StudentController {
                 student.getFirstName(),
                 student.getLastName(),
                 student.getSchool(),
-                student.getField()
+                student.getField(),
+                student.isHelper()
         ));
     }
 
@@ -47,16 +62,20 @@ public class StudentController {
                 student.getFirstName(),
                 student.getLastName(),
                 student.getSchool(),
-                student.getField()
+                student.getField(),
+                student.isHelper()
         ));
     }
 
     @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public Object delete(@PathVariable UUID id) {
+    public Object delete(@PathVariable UUID id, @HeaderParam("Authorization") String token) {
         Student student = studentService.getStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
         }
+
+        this.studentService.deleteStudent(student.getUuid(), token);
+
         return ResponseEntity.noContent();
     }
 
@@ -75,7 +94,8 @@ public class StudentController {
                 student.getFirstName(),
                 student.getLastName(),
                 student.getSchool(),
-                student.getField()
+                student.getField(),
+                student.isHelper()
         ));
     }
 }

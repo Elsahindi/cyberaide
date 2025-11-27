@@ -15,7 +15,7 @@ public class Skill {
     @Column(nullable = false)
     private String title;
 
-    /*
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Student student;*/
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_uuid", nullable = false)
+    private Student student;
 }

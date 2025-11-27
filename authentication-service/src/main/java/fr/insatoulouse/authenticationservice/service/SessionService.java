@@ -2,7 +2,7 @@ package fr.insatoulouse.authenticationservice.service;
 
 import fr.insatoulouse.authenticationservice.model.Credential;
 import fr.insatoulouse.authenticationservice.model.Session;
-import fr.insatoulouse.authenticationservice.repository.SessionRepository;
+import fr.insatoulouse.authenticationservice.repository.ISessionRepository;
 import fr.insatoulouse.shared.dto.CreateSessionDTO;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ public class SessionService {
 
     private static final int TOKEN_LENGTH = 128;
 
-    private final SessionRepository sessionRepository;
+    private final ISessionRepository ISessionRepository;
 
     private final CredentialService credentialService;
 
@@ -34,7 +34,7 @@ public class SessionService {
 
     @Nullable
     public Session getSession(String token) {
-        Session session = sessionRepository.findByToken(token).orElse(null);
+        Session session = ISessionRepository.findByToken(token).orElse(null);
 
         if (session == null) return null;
 
@@ -43,7 +43,7 @@ public class SessionService {
         }
 
         // Session expired
-        sessionRepository.delete(session);
+        ISessionRepository.delete(session);
 
         return null;
     }
@@ -58,6 +58,6 @@ public class SessionService {
                 new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000)
         ); // In 24 hours
 
-        return sessionRepository.save(session);
+        return ISessionRepository.save(session);
     }
 }

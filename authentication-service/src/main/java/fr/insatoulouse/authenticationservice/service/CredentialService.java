@@ -1,7 +1,7 @@
 package fr.insatoulouse.authenticationservice.service;
 
 import fr.insatoulouse.authenticationservice.model.Credential;
-import fr.insatoulouse.authenticationservice.repository.CredentialRepository;
+import fr.insatoulouse.authenticationservice.repository.ICredentialRepository;
 import fr.insatoulouse.shared.dto.CreateCredentialDTO;
 import fr.insatoulouse.shared.dto.CreateStudentDTO;
 import fr.insatoulouse.shared.dto.StudentDTO;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CredentialService {
 
-    private final CredentialRepository credentialRepository;
+    private final ICredentialRepository ICredentialRepository;
 
     private final StudentService studentService;
 
     public Credential getAndValidateCredential(String email, String password) {
-        Credential credential = credentialRepository.findByEmail(email)
+        Credential credential = ICredentialRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
         // TODO: Should never store passwords in plain text. Use hashing (e.g., BCrypt) instead.
@@ -33,14 +33,15 @@ public class CredentialService {
         Credential credential = new Credential();
         credential.setEmail(credentialDTO.email());
         credential.setPassword(credentialDTO.password());
-        credentialRepository.save(credential);
+        ICredentialRepository.save(credential);
 
         studentService.createStudent(new StudentDTO(
                 credential.getUuid(),
                 studentDTO.firstName(),
                 studentDTO.lastName(),
                 studentDTO.school(),
-                studentDTO.field()
+                studentDTO.field(),
+                studentDTO.isHelper()
         ));
     }
 

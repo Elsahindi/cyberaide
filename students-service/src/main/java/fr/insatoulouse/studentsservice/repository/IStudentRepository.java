@@ -5,10 +5,10 @@ import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface StudentRepository extends JpaRepository<@NonNull Student, @NonNull UUID> {
-
+public interface IStudentRepository extends JpaRepository<@NonNull Student, @NonNull UUID> {
+    List<Student> findDistinctBySkills_TitleIn(List<String> skillNames);
 }
