@@ -18,7 +18,7 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @GetMapping("/student/{id}/reviews")
+    @GetMapping("/student/{id}/review")
     public ResponseEntity<@NonNull List<ReviewDTO>> index(@PathVariable UUID id) {
         List<Review> reviews = reviewService.findByHelperUUID(id);
 
@@ -32,7 +32,7 @@ public class ReviewController {
         )).toList());
     }
 
-    @PostMapping("/student/{id}/reviews")
+    @PostMapping("/student/{id}/review")
     public ResponseEntity<@NonNull ReviewDTO> create(@PathVariable UUID id, @RequestBody CreateReviewDTO dto, @RequestHeader("Authorization") String token) {
         Review review = reviewService.createReview(dto, id, token);
 
