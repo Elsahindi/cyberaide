@@ -1,4 +1,4 @@
-package fr.insatoulouse.studentsservice;
+package fr.insatoulouse.reviewsservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class StudentsServiceApplication {
+public class ReviewsServiceApplication {
 
     @Bean
     @LoadBalanced
@@ -16,7 +16,7 @@ public class StudentsServiceApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(StudentsServiceApplication.class, args);
+        SpringApplication.run(ReviewsServiceApplication.class, args);
     }
 
 }

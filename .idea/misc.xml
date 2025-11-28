@@ -13,11 +13,14 @@
         <option value="$PROJECT_DIR$/students-service/pom.xml" />
         <option value="$PROJECT_DIR$/common/pom.xml" />
         <option value="$PROJECT_DIR$/shared/pom.xml" />
+        <option value="$PROJECT_DIR$/feedback-service/pom.xml" />
+        <option value="$PROJECT_DIR$/reviews-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/feedback-service/pom.xml" />
         <option value="$PROJECT_DIR$/profiles-service/pom.xml" />
       </set>
     </option>
